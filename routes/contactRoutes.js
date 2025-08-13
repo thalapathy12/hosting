@@ -8,21 +8,22 @@ const {
     deleteContact
 }
 =require("../controllers/contactController");
-const { protect, authorizeRoles } = require("../middleware/authMiddleware");
+const { authenticate } = require("../middleware/authMiddleware");
+const { authorizeRoles } = require("../middleware/roleMiddleware");
 
 // Create Contact (Admin & SuperAdmin)
-router.post("/", protect, authorizeRoles("Admin", "SuperAdmin"), createContact);
+router.post("/", authenticate, authorizeRoles("Admin", "Super_admin"), createContact);
 
 // Get All Contacts
-router.get("/", protect, authorizeRoles("Admin", "SuperAdmin"), getContacts);
+router.get("/", authenticate, authorizeRoles("Admin", "Super_admin"), getContacts);
 
 // Get Single Contact
-router.get("/:id", protect, authorizeRoles("Admin", "SuperAdmin"), getContactById);
+router.get("/:id", authenticate, authorizeRoles("Admin", "Super_admin"),getContactById);
 
 // Update Contact
-router.put("/:id", protect, authorizeRoles("Admin", "SuperAdmin"), updateContact);
+router.put("/:id", authenticate, authorizeRoles("Admin", "Super_admin"), updateContact);
 
 // Delete Contact
-router.delete("/:id", protect, authorizeRoles("Admin", "SuperAdmin"), deleteContact);
+router.delete("/:id", authenticate, authorizeRoles("Admin", "Super_admin"), deleteContact);
 
 module.exports = router;
