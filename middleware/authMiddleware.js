@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-exports.protect = async (req, res, next) => {
+exports.authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'Not authorized, token missing' });
@@ -17,13 +17,4 @@ exports.protect = async (req, res, next) => {
     console.error('JWT Error:', err.message);
     res.status(401).json({ error: 'Token failed' });
   }
-};
-
-exports.authorizeRoles = (...roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      return res.status(403).json({ error: `Access denied for role: ${req.user.role}` });
-    }
-    next();
-  };
 };
