@@ -1,25 +1,22 @@
 const mongoose = require('mongoose');
 
 const leadSchema = new mongoose.Schema({
-  fullName: { type: String, required: true },
-  email: String,
-  phone: String,
-  company: String,
-  source: { type: String, enum: ['Web', 'Call', 'Event', 'Email', 'Other'], default: 'Web' },
-  assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  notes: String,
-  interactions: [
-    {
-      date: { type: Date, default: Date.now },
-      type: { type: String },
-      message: String
-    }
-  ],
-  status: {
-    type: String,
-    enum: ['New', 'Qualified', 'Contacted', 'Converted', 'Lost', 'Rejected', 'OnHold'],
-    default: 'New'
+  leadId: { type: String, required: true, unique: true },
+  clientName: { type: String, required: true },
+  clientId: { type: String },
+  spocName: { type: String },
+  spocEmail: { type: String },
+  amount: { type: Number, required: true },
+  status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+  referrer: {
+    type: { type: String, enum: ['person', 'company'], required: true },
+    name: { type: String },
+    contact: { type: String },
+    details: { type: String }
   },
-}, { timestamps: true });
+  attachments: [{ fileName: String, fileUrl: String }],
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date }
+});
 
 module.exports = mongoose.model('Lead', leadSchema);
