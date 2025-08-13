@@ -3,12 +3,15 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
-  name: String,
+  userId: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  role: { type: String, enum: ['Admin', 'Super_admin', 'Member'], default: 'Member' },
+  status: { type: String, enum: ['active', 'inactive'], default: 'active' },
   password: { type: String, required: true },
-  role: { type: String, enum: ['SuperAdmin', 'Admin', 'Client'], default: 'Client' },
-  resetPasswordToken: String,
-  resetPasswordExpire: Date
+  resetPasswordToken: String,         // <-- updated
+  resetPasswordExpire: Date,          // <-- updated
+  created: { type: Date, default: Date.now }
 });
 
 userSchema.pre('save', async function (next) {
