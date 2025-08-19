@@ -5,6 +5,8 @@ const authRoutes = require('./routes/authRoutes');
 const leadRoutes = require('./routes/leadRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+
 
 dotenv.config();
 connectDB();
@@ -16,6 +18,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/leads', leadRoutes);
 app.use('/api/clients', clientRoutes);
 app.use("/api/contacts", contactRoutes);
+app.use('/api/payments',paymentRoutes);
+
 // Basic health check
 app.get('/', (req, res) => {
   res.send('CRM API is running...');
