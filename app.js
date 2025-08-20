@@ -6,6 +6,7 @@ const leadRoutes = require('./routes/leadRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const milestoneRoutes = require('./routes/milestoneRoutes');
 
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use('/api/leads', leadRoutes);
 app.use('/api/clients', clientRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use('/api/payments',paymentRoutes);
+app.use('/api/milestones', milestoneRoutes);
 
 // Basic health check
 app.get('/', (req, res) => {
