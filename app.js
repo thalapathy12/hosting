@@ -7,7 +7,9 @@ const clientRoutes = require('./routes/clientRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const milestoneRoutes = require('./routes/milestoneRoutes');
+const projectRoutes = require('./routes/projectRoutes');
 const cors = require('cors');
+const project = require('./models/project');
 
 
 
@@ -43,9 +45,10 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/leads', leadRoutes);
 app.use('/api/clients', clientRoutes);
-app.use("/api/contacts", contactRoutes);
+app.use('/api/contacts', contactRoutes);
 app.use('/api/payments',paymentRoutes);
 app.use('/api/milestones', milestoneRoutes);
+app.use('/api/projects', projectRoutes);
 
 // Basic health check
 app.get('/', (req, res) => {
