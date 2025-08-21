@@ -14,11 +14,21 @@ const userSchema = new mongoose.Schema({
   created: { type: Date, default: Date.now }
 });
 
+userSchema.pre("save", function (next) {
+  if (this.isModified("userId")){
+    if (!this.userId.startsWith("USR")) {
+      this.userId = "USR" + this.userId;
+    }
+  }
+  next();
+});
+
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
+
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
