@@ -15,6 +15,10 @@ const leadSchema = new mongoose.Schema({
     details: { type: String }
   },
   attachments: [{ fileName: String, fileUrl: String }],
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date }
 });
