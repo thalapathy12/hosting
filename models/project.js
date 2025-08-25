@@ -26,7 +26,7 @@ const projectSchema = new mongoose.Schema({
     dueDate: Date,
     completed: { type: Boolean, default: false }
   }],
-  teamMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  teamMembers: [{ type: String }],
   clientInfo: {
     name: String,
     spocName: String,
