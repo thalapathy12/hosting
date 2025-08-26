@@ -4,7 +4,8 @@ const {
   createLead,
   getAllLeads,
   updateLeadStatus,
-  convertToClient
+  convertToClient,
+  deleteClient
 } = require('../controllers/leadController');
 const { authenticate } = require('../middleware/authMiddleware');
 const { authorizeRoles} = require('../middleware/roleMiddleware');
