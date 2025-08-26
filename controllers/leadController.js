@@ -45,7 +45,7 @@ exports.convertToClient = async (req, res) => {
   }
 };
 
-exports.deleteClient = async (req, res) => {
+exports.deleteLead = async (req, res) => {
   try {
     const { id } = req.params;
 
