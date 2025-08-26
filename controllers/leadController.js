@@ -44,3 +44,18 @@ exports.convertToClient = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.deleteClient = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedLead = await Lead.findByIdAndDelete(id);
+    if (!deletedLead) {
+      return res.status(404).json({ success: false, message: 'Client not found' });
+    }
+
+    res.status(200).json({ success: true, message: 'Client deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
