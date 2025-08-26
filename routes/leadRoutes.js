@@ -12,6 +12,7 @@ router.post('/create', authenticate, authorizeRoles('Admin', 'Super_admin'), cre
 router.get('/', authenticate, authorizeRoles('Admin', 'Super_admin', 'Member'), getAllLeads);
 router.patch('/:id/status', authenticate, authorizeRoles('Admin', 'Super_admin'), updateLeadStatus);
 router.post('/:id/convert', authenticate, authorizeRoles('Admin', 'Super_admin'), convertToClient);
+router.delete('/:id', authenticate, authorizeRoles('Admin', 'Super_admin'), deleteClient);
 
 module.exports = router;
 
