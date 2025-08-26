@@ -59,3 +59,20 @@ exports.deleteClient = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.updateLead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    const lead = await Lead.findByIdAndUpdate(id, updatedData, { new: true });
+
+    if (!lead) {
+      return res.status(404).json({ success: false, message: 'Lead not found' });
+    }
+
+    res.status(200).json({ success: true, lead });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
